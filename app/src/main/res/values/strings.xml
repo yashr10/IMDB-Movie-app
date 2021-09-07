@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IMDB</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="noAccount">"Don't have an account  "</string>
+    <string name="default_web_clientt_id">541745919977-934h77gkmoq5mne8efsur7ousf88bs1m.apps.googleusercontent.com</string>
+</resources>
