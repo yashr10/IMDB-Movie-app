@@ -11,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.imdb.LoginActivity
 import com.example.imdb.R
+import com.example.imdb.ViewPagerAdapter
 import com.example.imdb.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class HomeFragment : Fragment() {
@@ -34,11 +36,22 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        /*val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
 
+       val tabLayout = binding.tabLayout
+        val viewPager2 = binding.viewPager
+
+        val adapter = activity?.let { ViewPagerAdapter(it.supportFragmentManager, lifecycle) }
+
+        viewPager2.adapter = adapter
+        TabLayoutMediator(tabLayout,viewPager2){tab,position ->
+
+            when(position){
+
+                0-> tab.text = "Latest"
+                1-> tab.text = "Top Rated"
+                2-> tab.text = "Upcoming"
+            }
+        }.attach()
 
 
         return root
