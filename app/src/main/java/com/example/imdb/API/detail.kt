@@ -1,4 +1,4 @@
-package com.example.imdb
+package com.example.imdb.API
 
 import com.google.gson.annotations.SerializedName
 
@@ -12,5 +12,7 @@ data class Detail(
     @SerializedName("vote_average")
     val vote_average : Double,
     @SerializedName("genre_ids")
-    val genre_ids : List<Int>
+    val genre_ids : List<Int>,
+
+    val release_date : String
 )

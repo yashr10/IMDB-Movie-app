@@ -1,4 +1,4 @@
-package com.example.imdb
+package com.example.imdb.Adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

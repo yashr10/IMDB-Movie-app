@@ -1,4 +1,4 @@
-package com.example.imdb
+package com.example.imdb.API
 
 import androidx.versionedparcelable.VersionedParcelize
 import com.google.gson.annotations.SerializedName
@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
  data class MovieResults(
 
     @SerializedName("page")
-     val page : Int,
+     val page : Int = 0,
     @SerializedName("total_pages")
-     val totalPage : Int,
+     val totalPage : Int = -1,
     @SerializedName("results")
-     val detail : List <Detail>
+     val detail : ArrayList <Detail> = ArrayList()
 )
 
 

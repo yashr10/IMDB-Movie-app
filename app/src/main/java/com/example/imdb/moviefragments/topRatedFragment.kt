@@ -1,72 +1,127 @@
 package com.example.imdb.moviefragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imdb.*
+import com.example.imdb.API.ApiInterface
+import com.example.imdb.API.Detail
+import com.example.imdb.API.MovieApiService
+import com.example.imdb.API.MovieResults
+import com.example.imdb.Adapters.MovieListAdapter
+import com.example.imdb.databinding.FragmentTopRatedBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class TopRatedFragment : Fragment() {
+class TopRatedFragment : Fragment() , onMovieClickListener {
 
-    private  val PAGE : Int = 1
-    private val LIMIT : Int = 20
-
+    private var _binding : FragmentTopRatedBinding? = null
+    private var PageStart = 1
+    private var PageEnd = 3
     private val CATEGORY = "top_rated"
-    lateinit var myAdapter: MyAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
-    lateinit var nestedScrollView: NestedScrollView
+    lateinit var myAdapter: MovieListAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var nestedScrollView: NestedScrollView
+    lateinit var recyclerView : RecyclerView
+   lateinit var   fetchedList : ArrayList <Detail>
+   lateinit var tempList : ArrayList<Detail>
+   lateinit var finalList : ArrayList<Detail>
+
+    private val binding get() = _binding!!
+
    // https://api.themoviedb.org/3/movie/top_rated?api_key=77214769cb25b5a3df5ee023d2c48666&language=en-US&page=1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_top_rated, container, false)
+    ): View {
+        _binding = FragmentTopRatedBinding.inflate(inflater, container, false)
 
-        val recyclerView : RecyclerView = view.findViewById(R.id.recyclerView_topRated)
-        nestedScrollView = view.findViewById(R.id.ns)
+        val root: View = binding.root
+        setHasOptionsMenu(true)
 
-        nestedScrollView.setOnScrollChangeListener(object :
-            NestedScrollView.OnScrollChangeListener {
-            override fun onScrollChange(
-                v: NestedScrollView?,
-                scrollX: Int,
-                scrollY: Int,
-                oldScrollX: Int,
-                oldScrollY: Int
-            ) {
-                if (v != null) {
-                    if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight){
 
-                    }
+        recyclerView = binding.recyclerViewTopRated
+        nestedScrollView = binding.ns
+        tempList = arrayListOf()
+        finalList = arrayListOf()
 
+       nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (v != null) {
+                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight){
+                    PageStart+= 1
+                    PageEnd+= 1
+                    work()
                 }
             }
-
         })
-
-
 
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
 
-        val apiServices = MovieApiService.getInstance().create(ApiInterface::class.java)
+
+        for (i in PageStart..PageEnd){
+
+            val apiServices = MovieApiService.getInstance().create(ApiInterface::class.java)
+            val call : Call<MovieResults> = apiServices.getAllMovies(CATEGORY,i)
+
+            call.enqueue(object : Callback<MovieResults> {
+                override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
+                    if (!response.isSuccessful){Log.d("token",response.code().toString())}
+                    val responseBody = response.body()
+                    fetchedList  = responseBody!!.detail
+                    tempList.addAll(fetchedList)
+                    finalList.addAll(fetchedList)
+
+                    myAdapter = MovieListAdapter(context!!,tempList,this@TopRatedFragment)
+                       myAdapter.notifyDataSetChanged()
+                    recyclerView.adapter = myAdapter
+                }
+
+                override fun onFailure(call: Call<MovieResults?>, t: Throwable) {
+                    Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
+                }
+            })
+
+        }
+
+
+
+       /* myAdapter = activity?.let { MyAdapter(it,tempList) }!!
+        myAdapter.notifyDataSetChanged()
+        recyclerView.adapter = myAdapter*/
+        /*val call : Call<MovieResults> = apiServices.getAllMovies(CATEGORY,PAGE)
+
+        call.enqueue(object : Callback<MovieResults> {
+            override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
+                if (!response.isSuccessful){Log.d("token",response.code().toString())}
+                val responseBody = response.body()
+                fetchedList  = responseBody!!.detail
+
+                tempList.addAll(fetchedList)
+
+                myAdapter = MyAdapter(context!!,tempList)
+                myAdapter.notifyDataSetChanged()
+                recyclerView.adapter = myAdapter
+            }
+
+            override fun onFailure(call: Call<MovieResults?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })*/
+
+
+      /*  val apiServices = MovieApiService.getInstance().create(ApiInterface::class.java)
 
         val call : Call<MovieResults> = apiServices.getAllMovies(CATEGORY,PAGE)
 
@@ -84,12 +139,236 @@ class TopRatedFragment : Fragment() {
             override fun onFailure(call: Call<MovieResults?>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-        })
+        })*/
 
-
-        return view
+        return root
     }
 
+    private fun work() {
+        for (i in PageStart..PageEnd){
+
+            val apiServices = MovieApiService.getInstance().create(ApiInterface::class.java)
+            val call : Call<MovieResults> = apiServices.getAllMovies(CATEGORY,i)
+
+            call.enqueue(object : Callback<MovieResults> {
+                override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
+                    if (!response.isSuccessful){Log.d("token",response.code().toString())}
+                    val responseBody = response.body()
+                    fetchedList  = responseBody!!.detail
+                    tempList.addAll(fetchedList)
+                    finalList.addAll(fetchedList)
+                    myAdapter = MovieListAdapter(context!!,tempList,this@TopRatedFragment)
+                    myAdapter.notifyDataSetChanged()
+                    recyclerView.adapter = myAdapter
+                }
+
+                override fun onFailure(call: Call<MovieResults?>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+        }
+
+    }
+
+
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.title_menu -> {
+                if (!item.isChecked) {
+                    item.isChecked
+                    tempList.sortBy {
+                        it.title
+                    }
+                }else {
+                    item.isChecked = false
+
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                    nestedScrollView.fullScroll(View.FOCUS_UP)
+
+                }
+
+
+            }
+            R.id.rating_menu -> {
+                if (!item.isChecked) {
+                    item.isChecked
+                    tempList.sortBy {
+                        it.vote_average
+                    }
+                }else {
+                    item.isChecked = false
+                    tempList = fetchedList
+
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                    nestedScrollView.fullScroll(View.FOCUS_UP)
+
+                }
+
+
+            }
+            R.id.releaseDate_menu -> {
+
+                if (!item.isChecked) {
+                    item.isChecked
+                    tempList.sortBy {
+                        it.release_date
+                    }
+                }else {
+                    item.isChecked = false
+                    tempList = fetchedList
+
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                    nestedScrollView.fullScroll(View.FOCUS_UP)
+
+                }
+
+            }
+            else ->
+            return super.onOptionsItemSelected(item)
+
+        }
+        return true
+    }
+*/
+
+    private fun filtering (menuItem: MenuItem, filter : String,menu: Menu) {
+
+        if (!menuItem.isChecked) {
+            clearSelectedMenu(menu)
+            menuItem.isChecked = true
+            val toBeSortList = tempList
+
+            if (filter == "title") {
+                toBeSortList.sortBy {
+                    it.title
+                }
+            }
+            if (filter == "release_date") {
+
+                toBeSortList.sortBy {
+                    it.release_date
+                }
+            }
+            if (filter == "vote_average") {
+                toBeSortList.sortBy {
+                    it.vote_average
+                }
+            }
+
+            myAdapter = MovieListAdapter(requireContext(), toBeSortList,this)
+            recyclerView.adapter!!.notifyDataSetChanged()
+
+            recyclerView.adapter = myAdapter
+            nestedScrollView.fullScroll(View.FOCUS_UP)
+
+        } else {
+            menuItem.isChecked = false
+
+            /* recyclerView.adapter!!.notifyDataSetChanged()*/
+
+            myAdapter = MovieListAdapter(requireContext(), finalList,this)
+            recyclerView.adapter!!.notifyDataSetChanged()
+            recyclerView.adapter = myAdapter
+            nestedScrollView.fullScroll(View.FOCUS_UP)
+
+        }
+
+
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        inflater.inflate(R.menu.menu_item,menu)
+
+       // val filter = menu.findItem(R.id.filter)
+
+        /*filter.setOnMenuItemClickListener {
+            Log.d("hi", "hi")
+            recyclerView.adapter!!.notifyDataSetChanged()
+            //  recyclerView.smoothScrollToPosition(0)
+            nestedScrollView.fullScroll(View.FOCUS_UP)
+            true
+        }*/
+
+       val titleFilter =  menu.findItem(R.id.title_menu)
+           titleFilter.setOnMenuItemClickListener {
+
+               filtering(it, "title",menu)
+
+            true }
+
+        val ratingFilter =  menu.findItem(R.id.rating_menu)
+        ratingFilter.setOnMenuItemClickListener {
+
+            filtering(it,"release_date",menu)
+
+            true }
+
+        val releaseDateFilter =  menu.findItem(R.id.releaseDate_menu)
+        releaseDateFilter.setOnMenuItemClickListener {
+
+            filtering(it,"vote_average",menu)
+
+            true }
+
+
+
+        //  val item = menu.findItem(R.id.app_bar_search)
+     //   val searchView = item?.actionView as SearchView
+
+       /* searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                tempList.clear()
+                val searchText = newText!!.lowercase()
+                if (searchText.isNotEmpty()){
+
+                    fetchedList.forEach{
+
+                        if (it.title.lowercase().contains(searchText)){
+                            tempList.add(it)
+                        }
+                    }
+                    recyclerView.adapter!!.notifyDataSetChanged()
+
+                }else{
+                    tempList.clear()
+                    tempList.addAll(fetchedList)
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                }
+
+                return false
+            }
+        })*/
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun clearSelectedMenu(menu: Menu) {
+
+        menu.findItem(R.id.title_menu).isChecked = false
+        menu.findItem(R.id.rating_menu).isChecked = false
+        menu.findItem(R.id.releaseDate_menu).isChecked = false
+
+
+    }
+
+    override fun OnMovieItemClicked(position: Int) {
+        val intent = Intent(context,IndividualMovieDetail::class.java)
+
+        intent.putExtra("title", finalList[position].title)
+        intent.putExtra("poster",finalList[position].poster_path)
+        intent.putExtra("rating", finalList[position].vote_average)
+        intent.putExtra("releaseDate", finalList[position].release_date)
+        intent.putExtra("plot", finalList[position].overview)
+        startActivity(intent)
+
+    }
 
 
 }

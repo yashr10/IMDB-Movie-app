@@ -1,10 +1,11 @@
-package com.example.imdb
+package com.example.imdb.Loginfeatures
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import com.example.imdb.MainActivity
 import com.example.imdb.databinding.ActivitySignUpBinding
 import com.example.imdb.ui.dashboard.DashboardFragment
 import com.google.firebase.auth.FirebaseAuth

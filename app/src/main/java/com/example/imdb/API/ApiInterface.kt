@@ -1,7 +1,6 @@
-package com.example.imdb
+package com.example.imdb.API
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiInterface {
@@ -16,13 +15,16 @@ interface ApiInterface {
 */
 
     @GET("/3/movie/{category}?api_key=e21eca73e69a05bfca866350af46980c&language=en-US")
-    fun getAllMovies(
+   fun getAllMovies(
         @Path("category") category : String,
         @Query("page") page :Int
       /*  @Query("api key")  apiKey : String,
         @Query("language") language : String,
         @Query("page") page : Int*/
     ) : Call <MovieResults>
+
+    @GET("/3/genre/movie/list?api_key=e21eca73e69a05bfca866350af46980c&language=en-US")
+    fun getGenre () : Call <Genre>
 
 
 }

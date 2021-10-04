@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.imdb.LoginActivity
+import com.example.imdb.Loginfeatures.LoginActivity
 import com.example.imdb.R
 import com.example.imdb.databinding.FragmentDashboardBinding
 

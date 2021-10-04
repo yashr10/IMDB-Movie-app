@@ -1,4 +1,4 @@
-package com.example.imdb
+package com.example.imdb.Loginfeatures
 
 import android.R.attr.phoneNumber
 import android.annotation.SuppressLint
@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.imdb.MainActivity
 import com.example.imdb.databinding.ActivitySignInPhoneBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -106,7 +107,7 @@ class SignInPhone : AppCompatActivity() {
             ?.addOnCompleteListener {
 
                 if (it.isSuccessful){
-                    val intent  = Intent(this ,MainActivity::class.java )
+                    val intent  = Intent(this , MainActivity::class.java )
                     startActivity(intent)
                 }
                 else{

@@ -1,4 +1,4 @@
-package com.example.imdb
+package com.example.imdb.Loginfeatures
 
 import android.R.attr
 import android.annotation.SuppressLint
@@ -8,6 +8,8 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.imdb.MainActivity
+import com.example.imdb.R
 import com.example.imdb.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -51,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.toSignupActLoginActivity.setOnClickListener(){
 
-            val signupIntent = Intent(this,SignUpActivity::class.java)
+            val signupIntent = Intent(this, SignUpActivity::class.java)
             startActivity(signupIntent)
 
         }
