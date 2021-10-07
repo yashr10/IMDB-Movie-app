@@ -1,4 +1,4 @@
-package com.example.imdb.Loginfeatures
+package com.example.imdb
 
 import android.R.attr.phoneNumber
 import android.annotation.SuppressLint

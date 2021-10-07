@@ -19,6 +19,9 @@ import com.example.imdb.databinding.FragmentTopRatedBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 
 class TopRatedFragment : Fragment() , onMovieClickListener {
@@ -361,11 +364,16 @@ class TopRatedFragment : Fragment() , onMovieClickListener {
     override fun OnMovieItemClicked(position: Int) {
         val intent = Intent(context,IndividualMovieDetail::class.java)
 
+        /*val json = Json.encodeToString(finalList[position])
+        intent.putExtra("obj",json)*/
         intent.putExtra("title", finalList[position].title)
         intent.putExtra("poster",finalList[position].poster_path)
         intent.putExtra("rating", finalList[position].vote_average)
         intent.putExtra("releaseDate", finalList[position].release_date)
         intent.putExtra("plot", finalList[position].overview)
+        intent.putExtra("id",finalList[position].id)
+        intent.putExtra("obj",finalList[position])
+
         startActivity(intent)
 
     }

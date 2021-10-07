@@ -1,9 +1,11 @@
 package com.example.imdb.API
 
-import androidx.versionedparcelable.VersionedParcelize
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.serialization.Serializable
 
-@VersionedParcelize
+@Parcelize
  data class MovieResults(
 
     @SerializedName("page")
@@ -12,7 +14,7 @@ import com.google.gson.annotations.SerializedName
      val totalPage : Int = -1,
     @SerializedName("results")
      val detail : ArrayList <Detail> = ArrayList()
-)
+) : Parcelable
 
 
 

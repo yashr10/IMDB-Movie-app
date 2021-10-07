@@ -9,15 +9,20 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/activity_individual_movie_detail.xml" value="0.19655797101449277" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/activity_login.xml" value="0.24230072463768115" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/activity_main.xml" value="0.21666666666666667" />
-        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_dashboard.xml" value="0.24230072463768115" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/activity_sign_in_phone.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/direct_to_login_features.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_individual_movie_information.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_latest_movie.xml" value="0.24230072463768115" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_notifications.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_top_rated.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/fragment_upcoming_movie.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/layout/movie_cardview.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/menu/menu_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/IMDB/app/src/main/res/menu/profile_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

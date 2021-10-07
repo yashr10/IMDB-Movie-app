@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setHomeButtonEnabled(true)
 
+        /*val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)*/
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+       setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 

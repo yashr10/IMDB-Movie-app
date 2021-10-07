@@ -1,8 +1,13 @@
 package com.example.imdb.API
 
-import com.google.gson.annotations.SerializedName
 
-data class Detail(
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.serialization.Serializable
+
+@Parcelize
+data class Detail (
     @SerializedName("poster_path")
     val poster_path : String,
     @SerializedName("title")
@@ -14,5 +19,7 @@ data class Detail(
     @SerializedName("genre_ids")
     val genre_ids : List<Int>,
 
-    val release_date : String
-)
+    val release_date : String,
+
+    val id : Int
+) : Parcelable

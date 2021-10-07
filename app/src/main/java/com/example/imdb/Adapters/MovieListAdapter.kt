@@ -72,18 +72,7 @@ class MovieListAdapter(private val context: Context, private val list: ArrayList
             }*/
 
             holder.itemView.setOnClickListener() {
-
                 onMovieClickListener.OnMovieItemClicked(position)
-               /* val intent = Intent(context,IndividualMovieDetail::class.java)
-
-                intent.putExtra("title", list[position].title)
-                intent.putExtra("poster",list[position].poster_path)
-                intent.putExtra("rating", list[position].vote_average)
-                intent.putExtra("releaseDate", list[position].release_date)
-                intent.putExtra("plot", list[position].overview)*/
-
-
-
             }
         }
 

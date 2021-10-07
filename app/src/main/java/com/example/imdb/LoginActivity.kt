@@ -1,6 +1,5 @@
-package com.example.imdb.Loginfeatures
+package com.example.imdb
 
-import android.R.attr
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +7,6 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.imdb.MainActivity
-import com.example.imdb.R
 import com.example.imdb.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -30,7 +27,6 @@ private lateinit var binding : ActivityLoginBinding
 @SuppressLint("StaticFieldLeak")
 private lateinit var googleSignInClient  : GoogleSignInClient
 private const val RC_SIGN_IN = 120
-private const val TAG = "see"
 private lateinit var firebaseAuth: FirebaseAuth
 class LoginActivity : AppCompatActivity() {
 
@@ -105,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
                     val dashboardIntent = Intent(this, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
+                    Toast.makeText(this, mAuth.currentUser?.email , Toast.LENGTH_LONG).show()
                     startActivity(dashboardIntent)
                 }
                 else{

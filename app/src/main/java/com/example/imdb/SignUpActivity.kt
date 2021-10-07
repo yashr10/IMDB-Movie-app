@@ -1,4 +1,4 @@
-package com.example.imdb.Loginfeatures
+package com.example.imdb
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
