@@ -31,12 +31,12 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
 
-
        val tabLayout = binding.tabLayout
         val viewPager2 = binding.viewPager
 
-        val adapter = activity?.let { ViewPagerAdapter(it.supportFragmentManager, lifecycle) }
+       // var adapter = activity?.let { ViewPagerAdapter(it.supportFragmentManager, lifecycle) }
 
+        var adapter = ViewPagerAdapter(childFragmentManager,lifecycle,)
         viewPager2.adapter = adapter
         TabLayoutMediator(tabLayout,viewPager2){tab,position ->
 

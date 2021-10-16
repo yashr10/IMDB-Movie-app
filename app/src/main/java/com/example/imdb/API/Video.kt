@@ -7,5 +7,6 @@ data  class Video (
 
 data class VideoDetails (
     val key : String,
-    val official : Boolean
+    val official : Boolean ,
+    val type : String
         )

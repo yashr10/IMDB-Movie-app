@@ -81,8 +81,12 @@ class LoginActivity : AppCompatActivity() {
 
         }
         binding.toPhoneAct.setOnClickListener(){
-            val intent = Intent(this, SignInPhone::class.java)
+            val intent = Intent(this, SignInPhone::class.java).apply {
+
+            }
+
             startActivity(intent)
+
         }
         binding.signInGoogle.setOnClickListener(){
 
@@ -99,9 +103,9 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if (it.isSuccessful){
                     val dashboardIntent = Intent(this, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
-                    Toast.makeText(this, mAuth.currentUser?.email , Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "LogIn Successful", Toast.LENGTH_SHORT).show()
                     startActivity(dashboardIntent)
                 }
                 else{
@@ -216,6 +220,7 @@ class LoginActivity : AppCompatActivity() {
 
                     updateUI(firebaseAuth.currentUser)
 
+                    Toast.makeText(this, "LogIn Successful", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
                     signOut()

@@ -86,7 +86,7 @@ class TopRatedFragment : Fragment() , onMovieClickListener {
                     tempList.addAll(fetchedList)
                     finalList.addAll(fetchedList)
 
-                    myAdapter = MovieListAdapter(context!!,tempList,this@TopRatedFragment)
+                    myAdapter = MovieListAdapter(context!!,finalList,this@TopRatedFragment)
                        myAdapter.notifyDataSetChanged()
                     recyclerView.adapter = myAdapter
                 }
@@ -160,7 +160,7 @@ class TopRatedFragment : Fragment() , onMovieClickListener {
                     fetchedList  = responseBody!!.detail
                     tempList.addAll(fetchedList)
                     finalList.addAll(fetchedList)
-                    myAdapter = MovieListAdapter(context!!,tempList,this@TopRatedFragment)
+                    myAdapter = MovieListAdapter(context!!,finalList,this@TopRatedFragment)
                     myAdapter.notifyDataSetChanged()
                     recyclerView.adapter = myAdapter
                 }
@@ -241,26 +241,25 @@ class TopRatedFragment : Fragment() , onMovieClickListener {
         if (!menuItem.isChecked) {
             clearSelectedMenu(menu)
             menuItem.isChecked = true
-            val toBeSortList = tempList
 
             if (filter == "title") {
-                toBeSortList.sortBy {
+                tempList.sortBy {
                     it.title
                 }
             }
             if (filter == "release_date") {
 
-                toBeSortList.sortBy {
+                tempList.sortBy {
                     it.release_date
                 }
             }
             if (filter == "vote_average") {
-                toBeSortList.sortBy {
+                tempList.sortBy {
                     it.vote_average
                 }
             }
 
-            myAdapter = MovieListAdapter(requireContext(), toBeSortList,this)
+            myAdapter = MovieListAdapter(requireContext(), tempList,this)
             recyclerView.adapter!!.notifyDataSetChanged()
 
             recyclerView.adapter = myAdapter
@@ -271,6 +270,7 @@ class TopRatedFragment : Fragment() , onMovieClickListener {
 
             /* recyclerView.adapter!!.notifyDataSetChanged()*/
 
+            tempList = finalList
             myAdapter = MovieListAdapter(requireContext(), finalList,this)
             recyclerView.adapter!!.notifyDataSetChanged()
             recyclerView.adapter = myAdapter
@@ -366,16 +366,30 @@ class TopRatedFragment : Fragment() , onMovieClickListener {
 
         /*val json = Json.encodeToString(finalList[position])
         intent.putExtra("obj",json)*/
-        intent.putExtra("title", finalList[position].title)
-        intent.putExtra("poster",finalList[position].poster_path)
-        intent.putExtra("rating", finalList[position].vote_average)
-        intent.putExtra("releaseDate", finalList[position].release_date)
-        intent.putExtra("plot", finalList[position].overview)
-        intent.putExtra("id",finalList[position].id)
-        intent.putExtra("obj",finalList[position])
+
+        intent.putExtra("title", tempList[position].title)
+        intent.putExtra("poster",tempList[position].poster_path)
+        intent.putExtra("rating", tempList[position].vote_average)
+        intent.putExtra("releaseDate", tempList[position].release_date)
+        intent.putExtra("plot", tempList[position].overview)
+        intent.putExtra("id",tempList[position].id)
+        intent.putExtra("obj",tempList[position])
 
         startActivity(intent)
 
+    }
+
+    fun backtoNormalList(){
+        linearLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = linearLayoutManager
+        myAdapter = MovieListAdapter(requireContext(), finalList,this)
+        recyclerView.adapter!!.notifyDataSetChanged()
+        recyclerView.adapter = myAdapter
+    }
+    override fun onPause() {
+        Log.d("OnPause","reached")
+        backtoNormalList()
+        super.onPause()
     }
 
 

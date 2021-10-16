@@ -18,15 +18,15 @@
 
             <group android:checkableBehavior="single">
 
-            <item
-                android:id="@+id/title_menu"
-                android:checkable="true"
-                android:title="Title" />
+                <item
+                    android:id="@+id/title_menu"
+                    android:checkable="true"
+                    android:title="Title" />
 
-            <item
-                android:id="@+id/rating_menu"
-                android:checkable="true"
-                android:title="Rating" />
+                <item
+                    android:id="@+id/rating_menu"
+                    android:checkable="true"
+                    android:title="Rating" />
 
                 <item
                     android:id="@+id/releaseDate_menu"

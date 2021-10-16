@@ -1,79 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:padding="16dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Enter Name"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:inputType="textPersonName" />
+
     <EditText
         android:id="@+id/birthdate"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="19dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:clickable="false"
         android:cursorVisible="false"
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:hint="Enter Date Of Birth"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        android:inputType="date" />
+
     <EditText
         android:id="@+id/phone_number"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Enter Mobile Number"
-        android:inputType="phone"
-        app:layout_constraintStart_toStartOf="@+id/birthdate"
-        app:layout_constraintTop_toBottomOf="@+id/birthdate" />
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/email_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Enter Email Address"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" />
 
     <Button
         android:id="@+id/newActFragmentHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_details"
-        app:layout_constraintVertical_bias="0.239" />
-
-    <EditText
-        android:id="@+id/email_id"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Enter Email Address"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/phone_number"
-        app:layout_constraintTop_toBottomOf="@+id/phone_number" />
+        android:text="LogIn/SignUp" />
 
     <Button
         android:id="@+id/update_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
         android:layout_marginTop="68dp"
-        android:text="Update Details"
-        app:layout_constraintStart_toStartOf="@+id/email_id"
-        app:layout_constraintTop_toBottomOf="@+id/email_id" />
+        android:text="Update Details" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
